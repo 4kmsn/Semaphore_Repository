@@ -4,8 +4,8 @@
   gather_facts: false
 
   tasks:
-    - name: Arrancar la VM Arch_Linux
-      raw: '& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm "Arch_Linux" --type headless'
+- name: Arrancar la VM Arch_Linux
+  raw: '"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm "Arch_Linux" --type headless'
 
 - name: Actualizar Arch Linux y apagarla
   hosts: linux_servers
