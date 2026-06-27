@@ -1,17 +1,14 @@
 ---
 - name: Iniciar la VM Arch_Linux desde Windows
-  hosts: windows-host
+  hosts: windows_host
   gather_facts: false
 
   tasks:
     - name: Arrancar la VM Arch_Linux
-      ansible.builtin.shell: >
-        "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"
-        startvm "Arch_Linux" --type headless
-      changed_when: true
+      raw: '& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm "Arch_Linux" --type headless'
 
 - name: Actualizar Arch Linux y apagarla
-  hosts: linux-servers
+  hosts: linux_servers
   gather_facts: false
 
   tasks:
@@ -20,12 +17,10 @@
         timeout: 300
         sleep: 5
 
-    - name: Actualizar el sistema
-      ansible.builtin.shell: pacman -Syu --noconfirm
-      become: true
+    - name: Actualizar Arch
+      shell: pacman -Syu --noconfirm
 
-    - name: Apagar la máquina
-      ansible.builtin.shell: shutdown now
-      become: true
+    - name: Apagar Arch
+      shell: shutdown now
       async: 1
       poll: 0
